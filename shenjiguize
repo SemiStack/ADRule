@@ -1,0 +1,152 @@
+[General]
+# ---(通用)---
+# 延迟测试
+# > Internet 测试 URL
+internet-test-url = http://www.aliyun.com
+# > 代理测速 URL
+proxy-test-url = http://www.gstatic.com/generate_204
+# > 测试超时（秒）
+# test-timeout = 5
+# TLS 引擎
+tls-provider = openssl
+# GeoIP 数据库
+geoip-maxmind-url = https://raw.githubusercontent.com/JMVoid/ipip2mmdb/release/Country.mmdb
+# IPv6 支持（关闭）
+ipv6 = false
+# ------
+# ---(Wi-Fi 访问)---
+allow-wifi-access = false
+wifi-access-http-port = 6152
+wifi-access-socks5-port = 6153
+# ------
+# ---(远程控制器)---
+# 允许 Surge 请求查看器或 Surge CLI 进行管理控制。
+# 如果允许由 Wi-Fi 控制则将「127.0.0.1」修改为「0.0.0.0」
+# external-controller-access = password@127.0.0.1:6170
+# ------
+# ---(兼容性)---
+# 兼容模式
+# compatibility-mode = 0
+# 跳过代理
+skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, localhost, *.local
+# 排除简单主机名
+exclude-simple-hostnames = true
+# SSID 组策略
+# 当 Wi-Fi 不是首选网络时 SSID 组策略使用默认策略（仅 macOS 版）
+use-default-policy-if-wifi-not-primary = false
+# ------
+# ---(DNS 服务器)---
+# 电信 118.118.118.118
+# 联通 116.116.116.116
+dns-server = 119.29.29.29,system
+# ------
+# ---(实验性功能)---
+# 使用 Network framework
+# network-framework = true
+# ------
+# ---(高级)---
+# 日志级别
+loglevel = notify
+# 当遇到 REJECT 策略时返回错误页
+show-error-page-for-reject = true
+# Always Real IP Hosts
+# 当 Surge VIF 处理 DNS 问题时，此选项要求 Surge 返回一个真正的 IP 地址，而不是一个假 IP 地址。
+# DNS 数据包将被转发到上游 DNS 服务器。
+always-real-ip = msftconnecttest.com, msftncsi.com, *.msftconnecttest.com, *.msftncsi.com, *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com
+# Hijack DNS
+# 默认情况下，Surge 只返回发送到 Surge DNS 地址的 DNS 查询的假 IP 地址(198.18.0.2)。
+# 有些设备或软件总是使用硬编码的 DNS 服务器。 (例如 Google Speakers 总是使用 8.8.8.8)。 您可以使用此选项劫持查询，以获得一个假地址。
+# hijack-dns = 8.8.8.8:53, 8.8.4.4:53
+# TCP Force HTTP Hosts
+# 让 Surge 把 TCP 连接当作 HTTP 请求来处理。Surge HTTP 引擎将处理这些请求，所有的高级功能，如捕获、重写和脚本等都可以使用。
+force-http-engine-hosts = *.ott.cibntv.net,123.59.31.1,119.18.193.135,122.14.246.33,175.102.178.52
+# VIF Excluded Routes
+# Surge VIF 只能处理 TCP 和 UDP 协议。使用此选项可以绕过特定的 IP 范围，允许所有流量通过。
+# tun-excluded-routes = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12
+# VIF Included Routes
+# 默认情况下，Surge VIF 接口会声明自己是默认路由。但是，由于 Wi-Fi 接口的路由较小，有些流量可能不会通过 Surge VIF 接口。使用此选项可以添加一条较小的路由。
+# tun-included-routes = 192.168.1.12/32
+# ------
+
+[Replica]
+# ---(实验性功能)---
+# 0 为关闭，1 为开启
+# > 隐藏 Apple 请求
+hide-apple-request = 0
+# > 隐藏崩溃追踪器请求
+hide-crash-reporter-request = 1
+# > 隐藏 UDP 会话
+hide-udp = 0
+# > 关键词过滤器
+# none（关闭关键词过滤器） / whitelist（blacklist（仅记录包含关键字的请求）） / blacklist（仅记录不包含关键字的请求） / pattern（匹配通配符的请求）
+# keyword-filter-type = none
+# > 关键词
+# keyword-filter = (null)
+# ------
+
+[Proxy]
+🌐Direct = direct
+⛔️Reject = reject
+
+[Proxy Group]
+♻️ 自动选择 = url-test, policy-path=https://dove.589669.xyz/all2surge?&sub=https%3A%2F%2Fapi.pay.pm%2Fapi%2Fv1%2Flink%2Fsip002%3Ftoken%3DC7QllboE788heqvM&emoji=2&sort=0, update-interval=0, url=http://www.gstatic.com/generate_204
+🌑Proxy = select, ♻️ 自动选择, 🌐Direct, policy-path=https://dove.589669.xyz/all2surge?&sub=https%3A%2F%2Fapi.pay.pm%2Fapi%2Fv1%2Flink%2Fsip002%3Ftoken%3DC7QllboE788heqvM&emoji=2&sort=0, update-interval=0, url=http://www.gstatic.com/generate_204
+🎞Streaming = select, 🌑Proxy, 🌐Direct
+🎞StreamingSE = select, 🌐Direct, 🌑Proxy
+🛡Guard = select, ⛔️Reject, 🌐Direct
+🧭Final = select, 🌐Direct, 🌑Proxy, policy-path=https://dove.589669.xyz/all2surge?&sub=https%3A%2F%2Fapi.pay.pm%2Fapi%2Fv1%2Flink%2Fsip002%3Ftoken%3DC7QllboE788heqvM&emoji=2&sort=0, update-interval=0, url=http://www.gstatic.com/generate_204
+
+[Rule]
+# https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Filter/Extra/Apple/BlockiOSUpdate.list,⛔️Reject
+# Client
+# > Proxy
+PROCESS-NAME,v2ray,🌐Direct
+PROCESS-NAME,ss-local,🌐Direct
+PROCESS-NAME,UUBooster,🌐Direct
+# > Download
+PROCESS-NAME,aria2c,🌐Direct
+PROCESS-NAME,fdm,🌐Direct
+PROCESS-NAME,Folx,🌐Direct
+PROCESS-NAME,NetTransport,🌐Direct
+PROCESS-NAME,Thunder,🌐Direct
+PROCESS-NAME,Transmission,🌐Direct
+PROCESS-NAME,uTorrent,🌐Direct
+PROCESS-NAME,WebTorrent,🌐Direct
+PROCESS-NAME,WebTorrent Helper,🌐Direct
+# Unbreak 后续规则修正
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Unbreak.list,🌐Direct
+# Advertising 广告
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Guard/Advertising.list,🛡Guard
+# Privacy 隐私
+# RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Guard/Privacy.list,🛡Guard
+# Hijacking 运营商劫持或恶意网站
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Guard/Hijacking.list,🛡Guard
+# Streaming 国际流媒体服务
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia/Streaming.list,🎞Streaming
+# StreamingSE 中国流媒体服务（面向海外版本）
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia/StreamingSE.list,🎞StreamingSE
+# Apple 服务
+# 在 https://github.com/DivineEngine/Profiles/tree/master/Surge/Rulesets/Extra/Apple 获取所需服务引入 Ruleset 类型规则及新建策略组。
+# Global 全球加速
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Global.list,🌑Proxy
+# China 中国直连
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/China.list,🌐Direct
+# Local Area Network 局域网
+RULE-SET,LAN,🌐Direct
+# GeoIP China
+GEOIP,CN,🌐Direct
+FINAL,🧭Final,dns-failed
+
+[Host]
+# Firebase Cloud Messaging
+mtalk.google.com = 108.177.125.188
+# Google Dl
+dl.google.com = server:119.29.29.29
+dl.l.google.com = server:119.29.29.29
+
+[MITM]
+tcp-connection = true
+hostname = *facebook.com, *weather-data.apple.com, *.googlevideo.com
+hostname-disabled = *facebook.com, *weather-data.apple.com
+ca-passphrase = A319D0B3
+ca-p12 = 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
